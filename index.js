@@ -14,21 +14,12 @@ const downloadMedia = async (media, i = 0) => {
     return await downloadMedia(media, i)
 }
 const prepareMedia = (media, location) => {
+    if (media.type == "photo") {
+        media.media = media.media.filter(m => (m.height == media.height && m.width == media.width))
+    }
     return media.media.map((m, i) => {
-        let fileName
         let url = m.url
-        if (media.type != "photos") {
-
-            const fileType = m.url.includes('.mp4') ? 'mp4' : 'jpg'
-            if (fileType == 'mp4') {
-                fileName = `video-${i}.mp4`
-            } else {
-                fileName = m.width == media.width && m.height == media.height ? 'original.jpg' : `${m.width}x${m.height}.jpg`
-            }
-        } else {
-            fileName = `image-${i}.jpg`
-        }
-
+        const fileName = media.type.includes("video") ? `video-${i}.mp4` : `original-${i}.jpg`
         const filePath = join(location, fileName)
         return { url, fileName, filePath }
     })
