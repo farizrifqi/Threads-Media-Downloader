@@ -31,28 +31,39 @@ const getMedia = (thread) => {
     let media = thread.post
     media = media.text_post_app_info.share_info.quoted_post ? media.text_post_app_info.share_info.quoted_post : media // quoted post
     media = media.text_post_app_info.share_info.reposted_post ? media.text_post_app_info.share_info.reposted_post : media // reposted post
+
+
+    if (media.carousel_media) {
+        if (media.carousel_media.video_versions) return {
+            user: media.user,
+            type: "videos",
+            media: media.carousel_media.map(media => (media.video_versions[0])),
+            width: media.original_width,
+            height: media.original_height
+        }
+        return {
+            user: media.user,
+            type: "photos",
+            media: media.carousel_media.map(media => (media.image_versions2.candidates[0])),
+            width: media.original_width,
+            height: media.original_height
+        }
+    }
+
     if (media.video_versions.length > 0) return {
         user: media.user,
         type: "video",
-        media: media.video_versions,
+        media: media.video_versions[0],
         width: media.original_width,
         height: media.original_height
     }
-    if (!media.carousel_media) return {
+    return {
         user: media.user,
         type: "photo",
         media: media.image_versions2.candidates,
         width: media.original_width,
         height: media.original_height
     }
-    return {
-        user: media.user,
-        type: "photos",
-        media: media.carousel_media.map(media => (media.image_versions2.candidates[0])),
-        width: media.original_width,
-        height: media.original_height
-    }
-
 }
 
 module.exports = { getAllMedia }
