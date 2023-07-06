@@ -1,7 +1,7 @@
 # ThreadsMediaDownloader
 Download bulk Threads.net media thru its graphql using NodeJS.
 
-Main function on [media.js](https://github.com/farizrifqi/threadsmediadownloader/blob/main/media.js), examples on [index.js](https://github.com/farizrifqi/threadsmediadownloader/blob/main/index.js)
+Main function on [media.js](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/media.js), examples on [index.js](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/index.js)
 
 ### Features
 - Download multiple media
