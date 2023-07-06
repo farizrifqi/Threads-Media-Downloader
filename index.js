@@ -14,22 +14,27 @@ const downloadMedia = async (media, i = 0) => {
     return await downloadMedia(media, i)
 }
 const prepareMedia = (media, location) => {
-    return media.media.map(m => {
-        let url = m.url
+    return media.media.map((m, i) => {
         let fileName
-        const fileType = m.url.includes('.mp4') ? 'mp4' : 'jpg'
-        if (fileType == 'mp4') {
-            fileName = `video-${i}.mp4`
-        } else {
-            fileName = m.width == media.width && m.height == media.height ? 'original.jpg' : `${m.width}x${m.height}.jpg`
-        }
-        const filePath = join(location, fileName)
+        let url = m.url
+        if (media.type != "photos") {
 
+            const fileType = m.url.includes('.mp4') ? 'mp4' : 'jpg'
+            if (fileType == 'mp4') {
+                fileName = `video-${i}.mp4`
+            } else {
+                fileName = m.width == media.width && m.height == media.height ? 'original.jpg' : `${m.width}x${m.height}.jpg`
+            }
+        } else {
+            fileName = `image-${i}.jpg`
+        }
+
+        const filePath = join(location, fileName)
         return { url, fileName, filePath }
     })
 }
 (async () => {
-    const POST_URL = "MEDIA_URL"
+    const POST_URL = "https://www.threads.net/t/CuWttdyyWvY"
     const LOCATION = 'download'
     const date = new Date().getTime()
 
@@ -39,7 +44,6 @@ const prepareMedia = (media, location) => {
     for await (const data of postData) {
         let dirLocation = join(`${LOCATION}`, `${data.user.username}-${date}/`)
         if (!fs.existsSync(dirLocation)) fs.mkdirSync(dirLocation)
-
         let media = prepareMedia(data, dirLocation)
         await downloadMedia(media)
     }

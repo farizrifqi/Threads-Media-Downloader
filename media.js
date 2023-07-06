@@ -33,16 +33,26 @@ const getMedia = (thread) => {
     media = media.text_post_app_info.share_info.reposted_post ? media.text_post_app_info.share_info.reposted_post : media // reposted post
     if (media.video_versions.length > 0) return {
         user: media.user,
+        type: "video",
         media: media.video_versions,
+        width: media.original_width,
+        height: media.original_height
+    }
+    if (!media.carousel_media) return {
+        user: media.user,
+        type: "photo",
+        media: media.image_versions2.candidates,
         width: media.original_width,
         height: media.original_height
     }
     return {
         user: media.user,
-        media: media.image_versions2.candidates,
+        type: "photos",
+        media: media.carousel_media.map(media => (media.image_versions2.candidates[0])),
         width: media.original_width,
         height: media.original_height
     }
+
 }
 
 module.exports = { getAllMedia }
