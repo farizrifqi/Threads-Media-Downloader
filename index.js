@@ -25,7 +25,7 @@ const prepareMedia = (media, location) => {
     })
 }
 (async () => {
-    const POST_URL = "https://www.threads.net/t/CuWttdyyWvY"
+    const POST_URL = "THREADS_URL"
     const LOCATION = 'download'
     const date = new Date().getTime()
 
