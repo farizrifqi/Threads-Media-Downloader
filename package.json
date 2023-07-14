@@ -11,6 +11,7 @@
   "dependencies": {
     "fs": "^0.0.1-security",
     "node-fetch": "^3.3.1",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "threads-api": "^1.4.2"
   }
 }
