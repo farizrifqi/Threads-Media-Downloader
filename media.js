@@ -35,10 +35,12 @@ const getAllMedia = async (url, i = 0) => {
         let allMedia = postData.data.data.containing_thread.thread_items.map(thread => {
             return getMedia(thread)
         })
-        let contThread = postData.data.data.reply_threads[0] || null
-        if (contThread.thread_items[0].post.user.username == uname) {
-            if (contThread && contThread.length > 0) contThread = contThread.thread_items.filter(t => (t.post.user.username == uname))
-            if (contThread && contThread.thread_items.length > 0) allMedia = [...allMedia, ...contThread.thread_items.map(t => (getMedia(t)))]
+        if (postData.data.data.reply_threads.length > 0) {
+            let contThread = postData.data.data.reply_threads[0] || null
+            if (contThread.thread_items[0].post.user.username == uname) {
+                if (contThread && contThread.length > 0) contThread = contThread.thread_items.filter(t => (t.post.user.username == uname))
+                if (contThread && contThread.thread_items.length > 0) allMedia = [...allMedia, ...contThread.thread_items.map(t => (getMedia(t)))]
+            }
         }
         return { media: allMedia }
     } catch (err) {
