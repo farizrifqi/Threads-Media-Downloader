@@ -76,16 +76,20 @@ const getMedia = (thread) => {
             taken_at: media.taken_at
         }
     }
-    if (media.video_versions.length > 0) return {
-        user: media.user,
-        type: "video",
-        media: media.video_versions[0],
-        width: media.original_width,
-        height: media.original_height,
-        caption: (media.caption) ? media.caption.text : "",
-        has_audio: media.has_audio,
-        taken_at: media.taken_at,
-        thumbnail: media.image_versions2.candidates.filter(img => (img.width == media.original_width && img.height == media.original_height))
+    if (media.video_versions.length > 0) {
+        let thumbnail = media.image_versions2.candidates.filter(img => (img.width == media.original_width && img.height == media.original_height))
+        thumbnail = thumbnail.length > 0 ? thumbnail : [media.image_versions2.candidates[0]]
+        return {
+            user: media.user,
+            type: "video",
+            media: media.video_versions[0],
+            width: media.original_width,
+            height: media.original_height,
+            caption: (media.caption) ? media.caption.text : "",
+            has_audio: media.has_audio,
+            taken_at: media.taken_at,
+            thumbnail
+        }
     }
     let medtest = media.image_versions2.candidates
         .filter(img => (img.width == media.original_width && img.height == media.original_height))
