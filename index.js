@@ -13,6 +13,7 @@ const downloadMedia = async (media, i = 0) => {
     media.shift()
     return await downloadMedia(media, i)
 }
+
 const prepareMedia = (media, location) => {
     if (media.type == "photo") {
         media.media = media.media.filter(m => (m.height == media.height && m.width == media.width))
@@ -25,19 +26,21 @@ const prepareMedia = (media, location) => {
     })
 }
 (async () => {
-    const POST_URL = "https://www.threads.net/@arteisca/post/CuonoWcSffX"
+    const POST_URL = "https://www.threads.net/@arteisca/post/CuonoWcSffX?asdf"
     const LOCATION = 'download'
     const date = new Date().getTime()
 
     if (!fs.existsSync(LOCATION)) fs.mkdirSync(LOCATION)
     let postData = await getAllMedia(POST_URL)
-
+    if (postData.msg) {
+        console.log(`Error: ${postData.msg}`)
+        return;
+    }
     for await (const data of postData.media) {
         let dirLocation = join(`${LOCATION}`, `${data.user.username}-${date}/`)
         if (!fs.existsSync(dirLocation)) fs.mkdirSync(dirLocation)
         let media = prepareMedia(data, dirLocation)
 
         await downloadMedia(media)
-        // console.log(media)
     }
 })()

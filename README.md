@@ -10,6 +10,4 @@ Main function on [media.js](https://github.com/farizrifqi/Threads-Media-Download
 ## Tools Used
 - [node-fetch](https://www.npmjs.com/package/node-fetch)
 - [fs](https://nodejs.org/api/fs.html)
-
-## Common Issue
-- **Can't get postId ?**<br/>Your address reached limit or blocked by Threads, try to switch to another server or use proxy.
+- [threads-api](https://github.com/junhoyeo/threads-api)
