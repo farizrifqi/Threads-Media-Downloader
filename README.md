@@ -1,13 +1,20 @@
 # ThreadsMediaDownloader
-Download bulk Threads.net media thru its graphql using NodeJS.
+Download bulk Threads.net media using [threads-api](https://github.com/junhoyeo/threads-api). This script re-written in TypeScript, **in purpose of me learning this language**.
 
-Main function on [media.js](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/media.js), examples on [index.js](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/index.js)
+Main function on [media.ts](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/src/media/media.ts), examples on [index.ts](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/index.ts)
 
 ### Features
-- Download multiple media
+- Download multiple media in a thread
 - Support image & video
 
-## Tools Used
-- [node-fetch](https://www.npmjs.com/package/node-fetch)
-- [fs](https://nodejs.org/api/fs.html)
+## Quickstart
+Install required packages by running the command below.
+```
+npm i axios threads-api fs path ts-node
+```
+
+To run, just do `npm run start`
+
+### Tools Used
 - [threads-api](https://github.com/junhoyeo/threads-api)
+- [axios](https://www.npmjs.com/package/axios)
