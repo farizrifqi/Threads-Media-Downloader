@@ -72,7 +72,7 @@ const getMedia = (thread) => {
             taken_at: media.taken_at
         }
     }
-    if (media.video_versions.length > 0) {
+    if (media.video_versions && media.video_versions.length > 0) {
         let thumbnail = media.image_versions2.candidates.filter(img => (img.width == media.original_width && img.height == media.original_height))
         thumbnail = thumbnail.length > 0 ? thumbnail : [media.image_versions2.candidates[0]]
 
