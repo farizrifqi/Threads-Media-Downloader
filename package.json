@@ -1,22 +1,38 @@
 {
-  "name": "threadsmediadownloader",
-  "version": "2.0.0",
-  "description": "",
-  "main": "./index.ts",
+  "name": "threads-dl",
+  "version": "2.1.0",
+  "description": "Threads.net Photo and Video API Downloader",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node ."
+    "test": "ts-node ./src/test/run.ts",
+    "build": "tsc --build",
+    "format": "prettier --write ."
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farizrifqi/Threads-Media-Downloader.git"
+  },
+  "keywords": [
+    "instagram",
+    "instagram-api",
+    "threads",
+    "downloader",
+    "video downloader",
+    "photo downloader"
+  ],
+  "bugs": {
+    "url": "https://github.com/farizrifqi/Threads-Media-Downloader/issues"
+  },
+  "homepage": "https://github.com/farizrifqi/Threads-Media-Downloader#readme",
+  "author": "Fariz Rifqi",
   "license": "ISC",
   "dependencies": {
-    "axios": "^1.5.0",
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7",
-    "threads-api": "^1.6.3",
-    "ts-node": "^10.9.1"
+    "axios": "^1.5.0"
   },
   "devDependencies": {
-    "@types/node": "^20.6.3"
+    "@types/node": "^20.6.3",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7"
   }
 }

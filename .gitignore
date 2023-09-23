@@ -1,2 +1,2 @@
-/node_modules
-/download
+node_modules/
+src/test/

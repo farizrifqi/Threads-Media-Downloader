@@ -1,20 +1,67 @@
 # ThreadsMediaDownloader
-Download bulk Threads.net media using [threads-api](https://github.com/junhoyeo/threads-api). This script re-written in TypeScript, **in purpose of me learning this language**.
 
-Main function on [media.ts](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/src/media/media.ts), examples on [index.ts](https://github.com/farizrifqi/Threads-Media-Downloader/blob/main/index.ts)
+🚫 No longer using [threads-api](https://github.com/junhoyeo/threads-api) since it discontinued. Bye 😥.
 
 ### Features
+
 - Download multiple media in a thread
 - Support image & video
 
 ## Quickstart
-Install required packages by running the command below.
+
+#### NPM
+
 ```
-npm i axios threads-api fs path ts-node
+npm install threads-dl
 ```
 
-To run, just do `npm run start`
+#### YARN
+
+```
+yarn install threads-dl
+```
+
+## Example Usage
+
+```ts
+import { getAllMedia } from "threads-dl"
+// or
+const { getAllMedia } = require("threads-dl")
+
+const url = "https://mediathreads.net/@zuck/post/Cuw_QlKxvbq"
+
+getAllMedia(url).then((result: any) => {
+  console.log(result) // JSON
+})
+```
+
+## Example Response
+
+```ts
+{
+  user: {
+    profile_pic_url: string,
+    username: string,
+    id: null,
+    is_verified: boolean,
+    pk: string
+  },
+  type: "photo" | "photos" | "video" | "videos",
+  media: {
+    width?: number,
+    height?: number,
+    url: string,
+  },
+  width: number,
+  height: number,,
+  caption: string | undefined,
+  has_audio: boolean | undefined,
+  taken_at: number,
+  thumbnail?: any[] | undefined,
+}
+
+```
 
 ### Tools Used
-- [threads-api](https://github.com/junhoyeo/threads-api)
+
 - [axios](https://www.npmjs.com/package/axios)

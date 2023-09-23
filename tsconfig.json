@@ -1,17 +1,14 @@
 {
-    "compilerOptions": {
-        "target": "es6",
-        "lib": [
-            "es6"
-        ],
-        "rootDir": "./",
-        "outDir": "./build",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "types": [
-            "node"
-        ],
-        "skipLibCheck": true,
-        "inlineSourceMap": false,
-    },
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "lib": ["es2020", "dom"],
+    "module": "CommonJS",
+    "outDir": "dist",
+    "removeComments": true,
+    "rootDir": "./src/media/",
+    "declaration": true,
+    "target": "es2020"
+  },
+  "include": ["./src/media/"],
+  "exclude": ["./src/example"]
 }
