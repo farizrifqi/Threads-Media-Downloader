@@ -12,21 +12,21 @@
 #### NPM
 
 ```
-npm install threads-dl
+npm install threadsdl
 ```
 
 #### YARN
 
 ```
-yarn install threads-dl
+yarn install threadsdl
 ```
 
 ## Example Usage
 
 ```ts
-import { getAllMedia } from "threads-dl"
+import { getAllMedia } from "threadsdl"
 // or
-const { getAllMedia } = require("threads-dl")
+const { getAllMedia } = require("threadsdl")
 
 const url = "https://mediathreads.net/@zuck/post/Cuw_QlKxvbq"
 
