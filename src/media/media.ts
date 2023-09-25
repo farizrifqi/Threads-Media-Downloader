@@ -1,5 +1,5 @@
 import { BASE_API_URL } from "./constants"
-import { ThreadsMedia } from "./media-types"
+import { OriginalMedia, ThreadsMedia } from "./media-types"
 import axios from "axios"
 
 const _cleanUrl = (url: string) => {
@@ -9,9 +9,11 @@ const _cleanUrl = (url: string) => {
   if (isURLClean) return _cleanUrl(url.substring(0, url.length - 1))
   return url
 }
+
 const _getThreadId = (url: string) => {
   return url.split("/")[url.split("/").length - 1]
 }
+
 const _getPostId = (url: string) => {
   try {
     url = _cleanUrl(url)
@@ -29,6 +31,7 @@ const _getPostId = (url: string) => {
     return null
   }
 }
+
 const _getPostData = async (postId: string): Promise<any> => {
   try {
     const response = await axios.request({
@@ -128,7 +131,8 @@ const _getMedia = (thread: any): ThreadsMedia => {
     thumbnail: undefined
   }
 }
-const getAllMedia = async (url): Promise<{ media: ThreadsMedia[] } | any> => {
+
+const getAllMedia = async (url): Promise<{ media: ThreadsMedia[] | ThreadsMedia } | any> => {
   try {
     const postId = _getPostId(_cleanUrl(url))
     if (!postId) return { msg: "invalid url" }
@@ -144,7 +148,6 @@ const getAllMedia = async (url): Promise<{ media: ThreadsMedia[] } | any> => {
 
     // Get all media from original post
     let allMedia = containedThreads.map((thread) => _getMedia(thread))
-
     const replyThreadsData = postData.reply_threads
 
     // Check if post containing reply
@@ -172,7 +175,11 @@ const getAllMedia = async (url): Promise<{ media: ThreadsMedia[] } | any> => {
       }
     }
 
-    allMedia = allMedia.filter((m) => m.media.length > 0)
+    if ((allMedia[0].media as any).length === undefined) {
+      allMedia = allMedia.filter((m) => (m.media as OriginalMedia)?.url)
+    } else {
+      allMedia = allMedia.filter((m) => (m.media as OriginalMedia[]).length > 0)
+    }
 
     return {
       media: allMedia

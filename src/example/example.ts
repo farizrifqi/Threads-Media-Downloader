@@ -29,7 +29,7 @@ const downloadMedia = async (media: DownloadAbleMedia[], i = 0): Promise<void> =
   return await downloadMedia(media, i)
 }
 
-const prepareMedia = (media: ThreadsMedia, location: string) => {
+const prepareMedia = (media: any, location: string) => {
   if (media.type == "photo") {
     media.media = media.media.filter((m: OriginalMedia) => m.height == media.height && m.width == media.width)
   }

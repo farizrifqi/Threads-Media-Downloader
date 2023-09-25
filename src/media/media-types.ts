@@ -1,7 +1,7 @@
 export interface ThreadsMedia {
   user: any
   type: "photo" | "photos" | "video" | "videos"
-  media: OriginalMedia[]
+  media: Array<OriginalMedia> | OriginalMedia
   width: number
   height: number
   caption: string | undefined
