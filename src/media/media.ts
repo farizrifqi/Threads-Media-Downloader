@@ -32,7 +32,7 @@ const _getPostId = (url: string) => {
   }
 }
 
-const _getPostData = async (postId: string): Promise<any> => {
+const _getPostData = async (postId: string, i: number = 0): Promise<any> => {
   try {
     const response = await axios.request({
       method: "POST",
@@ -48,6 +48,7 @@ const _getPostData = async (postId: string): Promise<any> => {
     })
     return response?.data?.data?.data
   } catch (err) {
+    if (i < 2) return await _getPostData(postId, i++)
     return null
   }
 }
@@ -153,7 +154,7 @@ const getAllMedia = async (url): Promise<{ media: ThreadsMedia[] | ThreadsMedia 
     // Check if post containing reply
     if (replyThreadsData && replyThreadsData.length > 0) {
       const firstReply = replyThreadsData[0] || null
-      const isFirstReplySameAsAuthor = firstReply.thread_items[0].post.user.username == uname
+      const isFirstReplySameAsAuthor = firstReply?.thread_items[0]?.post?.user?.username == uname
 
       if (firstReply.thread_items.length > 0 && isFirstReplySameAsAuthor) {
         // Replies with same author
