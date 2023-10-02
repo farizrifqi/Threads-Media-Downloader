@@ -57,12 +57,12 @@ const _getMedia = (thread: any): ThreadsMedia => {
   let media = thread.post
 
   // Quoted post
-  if (media.text_post_app_info.share_info.quoted_post) {
+  if (media.text_post_app_info.share_info.quoted_post && media.carousel_media && (!media.image_versions2 || media.image_versions2.length == 0) && (!media.video_versions || media.video_versions.length == 0)) {
     media = media.text_post_app_info.share_info.quoted_post
   }
 
   // reposted post
-  if (media.text_post_app_info.share_info.reposted_post) {
+  if (media.text_post_app_info.share_info.reposted_post && media.carousel_media && (!media.image_versions2 || media.image_versions2.length == 0) && (!media.video_versions || media.video_versions.length == 0)) {
     media = media.text_post_app_info.share_info.reposted_post
   }
 
