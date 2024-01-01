@@ -67,9 +67,9 @@ const _getMedia = (thread: any): ThreadsMedia => {
   }
 
   // Check if multiple media
-  if (media.carousel_media) {
+  if (media.carousel_media || media.carousel_media?.length > 0) {
     // Check if media was a video
-    if (media.carousel_media.video_versions) {
+    if (media.carousel_media?.filter((m: any) => m.video_versions)?.length > 0) {
       return {
         user: media.user,
         type: "videos",
@@ -79,7 +79,14 @@ const _getMedia = (thread: any): ThreadsMedia => {
         caption: media.caption ? media.caption.text : "",
         has_audio: media.has_audio,
         taken_at: media.taken_at,
-        thumbnail: undefined
+        thumbnail: media.carousel_media.map((media: { image_versions2: { candidates: any } }) => {
+          const candidate = media.image_versions2.candidates[0]
+          return {
+            url: candidate.url,
+            height: candidate.url.match(/\_p(.*?)x(.*?)&/)[2] ?? null,
+            width: candidate.url.match(/\_p(.*?)x(.*?)&/)[1] ?? null
+          }
+        })
       }
     }
 
